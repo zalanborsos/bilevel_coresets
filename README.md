@@ -32,7 +32,7 @@ Python 3 is required.  To install the required dependencies, run:
 ```bash
 pip install -r requirements.txt
 ```
-If you are planning to use the NTK proxy, consider installing the GPU version of JAX: instructions [here](https://github.com/google/jax).
+If you are planning to use the NTK proxy, consider installing the GPU version of JAX: instructions [here](https://github.com/google/jax#installation).
 
 
 ## Citation
