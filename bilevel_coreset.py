@@ -47,7 +47,7 @@ class BilevelCoreset:
         return torch.from_numpy(cg(op, v, maxiter=self.max_conj_grad_it)[0]).float()
 
     def implicit_grad_batch(self, inner_loss, outer_loss, weights, params):
-        dg_dalpha = grad(outer_loss, params)[0].view(-1).detach() * 1e-5
+        dg_dalpha = grad(outer_loss, params)[0].view(-1).detach() * 1e-4
         ivhp = self.inverse_hvp(inner_loss, params, dg_dalpha)
         dg_dtheta = grad(inner_loss, params, create_graph=True, retain_graph=True)[0].view(-1)
         return -grad(dg_dtheta, weights, grad_outputs=ivhp)[0].view(-1).detach()
