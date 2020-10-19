@@ -1,0 +1,54 @@
+{
+    "coreset": {
+        "permmnist": 0.01,
+        "splitmnist": 100.0
+    },
+    "entropy": {
+        "permmnist": 0.01,
+        "splitmnist": 100.0
+    },
+    "frcl": {
+        "permmnist": 0.01,
+        "splitmnist": 10.0
+    },
+    "grad_matching": {
+        "permmnist": 0.01,
+        "splitmnist": 10.0
+    },
+    "hardest": {
+        "permmnist": 0.01,
+        "splitmnist": 0.1
+    },
+    "icarl": {
+        "permmnist": 0.1,
+        "splitmnist": 10.0
+    },
+    "kcenter_embedding": {
+        "permmnist": 0.01,
+        "splitmnist": 100.0
+    },
+    "kcenter_features": {
+        "permmnist": 0.01,
+        "splitmnist": 100.0
+    },
+    "kcenter_grads": {
+        "permmnist": 0.01,
+        "splitmnist": 10.0
+    },
+    "kmeans_embedding": {
+        "permmnist": 0.01,
+        "splitmnist": 100.0
+    },
+    "kmeans_features": {
+        "permmnist": 0.01,
+        "splitmnist": 100.0
+    },
+    "kmeans_grads": {
+        "permmnist": 0.01,
+        "splitmnist": 1.0
+    },
+    "uniform": {
+        "permmnist": 0.01,
+        "splitmnist": 10.0
+    }
+}

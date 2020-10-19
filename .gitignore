@@ -1,3 +1,4 @@
-.idea
-.ipynb_checkpoints
-.data
+/.idea
+/.ipynb_checkpoints
+/data/
+/cl_streaming/data/
