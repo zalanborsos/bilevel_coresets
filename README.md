@@ -1,5 +1,7 @@
 # Coresets via Bilevel Optimization
 
+<img src="thumbnail.png" width="100"/>
+
 This is a reference implementation for "Coresets via Bilevel Optimization for Continual Learning and Streaming" [https://arxiv.org/pdf/2006.03875.pdf](https://arxiv.org/pdf/2006.03875.pdf). 
 
 
