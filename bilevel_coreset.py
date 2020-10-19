@@ -90,7 +90,7 @@ class BilevelCoreset:
         return weights, alpha, outer_loss, inner_loss
 
     def build_with_representer_proxy_batch(self, X, y, m, kernel_fn_np, data_weights=None,
-                                           cache_kernel=False, start_size=10, inner_reg=1e-4):
+                                           cache_kernel=False, start_size=1, inner_reg=1e-4):
         """Build a coreset of size m based on (X, y, weights).
 
        Args:
