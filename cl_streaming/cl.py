@@ -57,12 +57,13 @@ def continual_learning(args):
             DataLoader(test_data, batch_size=args.batch_size, num_workers=num_workers, pin_memory=pin_memory))
 
     nr_classes = 10
+    inner_reg = 1e-3
+
     if dataset == 'permmnist':
         model = models.FNNet(28 * 28, 100, nr_classes).to(device)
-        inner_reg = 1e-3
     else:
         model = models.ConvNet(nr_classes).to(device)
-        inner_reg = 1e-3
+
     training_op = training.Training(model, device, nr_epochs, beta=beta)
     kernel_fn = get_kernel_fn(dataset)
 
@@ -80,7 +81,7 @@ def continual_learning(args):
         X, y, _, _ = tasks[i]
         if method == 'coreset':
             chosen_inds, _, = bc.build_with_representer_proxy_batch(X, y, size_per_task, kernel_fn, cache_kernel=True,
-                                                             start_size=1, inner_reg=inner_reg)
+                                                                    start_size=1, inner_reg=inner_reg)
         else:
             rs = np.random.RandomState(0)
             summarizer = summary.Summarizer.factory(method, rs)
