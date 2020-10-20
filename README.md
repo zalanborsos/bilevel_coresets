@@ -23,7 +23,7 @@ coreset_size = 10
 coreset_constructor = bilevel_coreset.BilevelCoreset(outer_loss_fn=loss_utils.cross_entropy,
                                                     inner_loss_fn=loss_utils.cross_entropy,
                                                     out_dim=y.shape[1])
-coreset_inds, coreset_weights = bilevel_coreset.build_with_representer_proxy_batch(x, y, coreset_size, linear_kernel_fn)
+coreset_inds, coreset_weights = coreset_constructor.build_with_representer_proxy_batch(x, y, coreset_size, linear_kernel_fn)
 x_coreset, y_coreset = x[coreset_inds], y[coreset_inds]
 ```
 
