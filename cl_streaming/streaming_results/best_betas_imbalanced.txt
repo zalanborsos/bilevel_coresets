@@ -1,0 +1,11 @@
+{
+    "cbrs": {
+        "splitmnistimbalanced": 10.0
+    },
+    "coreset": {
+        "splitmnistimbalanced": 10.0
+    },
+    "reservoir": {
+        "splitmnistimbalanced": 100.0
+    }
+}

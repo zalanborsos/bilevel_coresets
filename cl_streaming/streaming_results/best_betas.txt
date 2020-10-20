@@ -1,0 +1,10 @@
+{
+    "coreset": {
+        "permmnist": 0.01,
+        "splitmnist": 1000.0
+    },
+    "reservoir": {
+        "permmnist": 1.0,
+        "splitmnist": 10.0
+    }
+}
