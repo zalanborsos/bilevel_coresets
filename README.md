@@ -63,7 +63,7 @@ with the corresponding ```--exp``` argument.
 ## Citation
 
 If you use the code in a publication, please cite the paper:
-```python
+```
 @article{borsos2020coresets,
       title={Coresets via Bilevel Optimization for Continual Learning and Streaming}, 
       author={Zalán Borsos and Mojmír Mutný and Andreas Krause},
