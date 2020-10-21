@@ -20,11 +20,12 @@ class BilevelCoreset:
         inner_lr (float): learning rate of the inner optimizer (L-BFGS)
         max_conj_grad_it (int): number of conjugate gradient steps in the approximate Hessian-vector products
         candidate_batch_size (int): number of candidate points considered in each selection step
+        div_tol (float): divergence tolerance threshild for the inner optimization problem
         logging_period (int): logging period based on coreset size
     """
 
-    def __init__(self, outer_loss_fn, inner_loss_fn, out_dim=10, max_outer_it=40, max_inner_it=300,
-                 outer_lr=0.01, inner_lr=0.25, max_conj_grad_it=50, candidate_batch_size=200, logging_period=10):
+    def __init__(self, outer_loss_fn, inner_loss_fn, out_dim=10, max_outer_it=40, max_inner_it=300, outer_lr=0.01,
+                 inner_lr=0.25, max_conj_grad_it=50, candidate_batch_size=200, div_tol=10, logging_period=10):
         self.outer_loss_fn = outer_loss_fn
         self.inner_loss_fn = inner_loss_fn
         self.out_dim = out_dim
@@ -34,6 +35,7 @@ class BilevelCoreset:
         self.inner_lr = inner_lr
         self.max_conj_grad_it = max_conj_grad_it
         self.candidate_batch_size = candidate_batch_size
+        self.div_tol = div_tol
         self.logging_period = logging_period
 
     def hvp(self, loss, params, v):
@@ -47,7 +49,7 @@ class BilevelCoreset:
         return torch.from_numpy(cg(op, v, maxiter=self.max_conj_grad_it)[0]).float()
 
     def implicit_grad_batch(self, inner_loss, outer_loss, weights, params):
-        dg_dalpha = grad(outer_loss, params)[0].view(-1).detach() * 1e-4
+        dg_dalpha = grad(outer_loss, params)[0].view(-1).detach() * 1e-3
         ivhp = self.inverse_hvp(inner_loss, params, dg_dalpha)
         dg_dtheta = grad(inner_loss, params, create_graph=True, retain_graph=True)[0].view(-1)
         return -grad(dg_dtheta, weights, grad_outputs=ivhp)[0].view(-1).detach()
@@ -61,21 +63,28 @@ class BilevelCoreset:
 
         # initialize the representer coefficients
         alpha = torch.randn(size=[m, self.out_dim], requires_grad=True)
-        alpha.data *= 0.001
+        alpha.data *= 0.01
         for outer_it in range(self.max_outer_it):
             # perform inner opt
             outer_optimizer.zero_grad()
+            inner_loss = np.inf
+            while inner_loss > self.div_tol:
 
-            def closure():
-                inner_optimizer.zero_grad()
+                def closure():
+                    inner_optimizer.zero_grad()
+                    inner_loss = self.inner_loss_fn(K_S_S, alpha, y_S, weights, inner_reg)
+                    inner_loss.backward()
+                    return inner_loss
+
+                inner_optimizer = torch.optim.LBFGS([alpha], lr=self.inner_lr, max_iter=self.max_inner_it)
+
+                inner_optimizer.step(closure)
                 inner_loss = self.inner_loss_fn(K_S_S, alpha, y_S, weights, inner_reg)
-                inner_loss.backward()
-                return inner_loss
-
-            inner_optimizer = torch.optim.LBFGS([alpha], lr=self.inner_lr, max_iter=self.max_inner_it)
-
-            inner_optimizer.step(closure)
-            inner_loss = self.inner_loss_fn(K_S_S, alpha, y_S, weights, inner_reg)
+                if inner_loss > self.div_tol:
+                    # reinitialize upon divergence
+                    print("Warning: inner opt diverged, try setting lower inner learning rate.")
+                    alpha = torch.randn(size=[m, self.out_dim], requires_grad=True)
+                    alpha.data *= 0.01
 
             # calculate outer loss
             outer_loss = self.outer_loss_fn(K_X_S, alpha, y_X, data_weights, 0)
