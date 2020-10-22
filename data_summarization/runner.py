@@ -43,5 +43,12 @@ if __name__ == '__main__':
         pool.map(call_script, args)
         pool.close()
         pool.join()
+    elif exp == 'resnet_cifar':
+        coreset_sizes = [200]
+        args = list(itertools.product([exp], methods, coreset_sizes, seeds))
+        random.shuffle(args)
+        pool.map(call_script, args)
+        pool.close()
+        pool.join()
     else:
         raise Exception('Unknown experiment')
