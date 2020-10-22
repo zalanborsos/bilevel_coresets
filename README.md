@@ -6,7 +6,7 @@ This is a reference implementation for "Coresets via Bilevel Optimization for Co
 
 
 ## Overview
-To get started with the library, check out [`demo.ipynb`](https://colab.research.google.com/github/zalanborsos/bilevel_coresets/blob/master/demo.ipynb) that shows how to build coresets for a toy regression 
+To get started with the library, check out [`demo.ipynb`](https://colab.research.google.com/github/zalanborsos/bilevel_coresets/blob/main/demo.ipynb) that shows how to build coresets for a toy regression 
 problem and for MNIST classification. The following snippet outlines the general usage:
 ```python
 import bilevel_coreset
