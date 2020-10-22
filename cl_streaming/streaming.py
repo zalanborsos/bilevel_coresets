@@ -170,6 +170,7 @@ def streaming(args):
     num_workers = args.num_workers
     pin_memory = device == 'cuda'
 
+    inner_reg = 1e-3
     if dataset == 'permmnist':
         generator = datagen.PermutedMnistGenerator(samples_per_task)
     elif dataset == 'splitmnist':
@@ -191,7 +192,6 @@ def streaming(args):
                                        pin_memory=pin_memory))
 
     nr_classes = 10
-    inner_reg = 1e-4
 
     if dataset == 'permmnist':
         model = models.FNNet(28 * 28, 100, nr_classes).to(device)
