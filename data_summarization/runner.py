@@ -44,7 +44,7 @@ if __name__ == '__main__':
         pool.close()
         pool.join()
     elif exp == 'resnet_cifar':
-        coreset_sizes = [200]
+        coreset_sizes = [210]
         args = list(itertools.product([exp], methods, coreset_sizes, seeds))
         random.shuffle(args)
         pool.map(call_script, args)
