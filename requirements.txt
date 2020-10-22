@@ -7,5 +7,5 @@ matplotlib==3.3.2
 jax==0.2.3
 jaxlib==0.1.55
 neural-tangents==0.3.4
-seaborn=0.10.1
-tqdm=4.36.1
+seaborn==0.10.1
+tqdm==4.36.1
