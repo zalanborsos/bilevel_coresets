@@ -176,6 +176,7 @@ def streaming(args):
     elif dataset == 'splitmnist':
         generator = datagen.SplitMnistGenerator(samples_per_task)
     elif dataset == 'splitmnistimbalanced':
+        inner_reg = 1e-4
         generator = datagen.SplitMnistImbalancedGenerator()
 
     tasks = []
