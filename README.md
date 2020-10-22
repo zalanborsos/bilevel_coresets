@@ -39,6 +39,21 @@ pip install -r requirements.txt
 If you are planning to use the NTK proxy, consider installing the GPU version of JAX: instructions [here](https://github.com/google/jax#installation).
 If you would like to run the experiments, add the project root to your PYTHONPATH env variable.
 
+## Data Summarization
+
+Change dir to ```data_summarizaiton```. For running and plotting the MNIST summarization experiment, adjust the globals
+in ```runner.py``` to your setup and run:
+```bash
+python runner.py --exp cnn_mnist
+python plotter.py --exp cnn_mnist
+```
+
+Similarly, for the CIFAR-10 summary for a version of ResNet-18:
+```bash
+python runner.py --exp resnet_cifar
+python plotter.py --exp resnet_cifar
+```
+
 ## Continual Learning and Streaming
 We showcase the usage our coreset construction in continual learning and streaming with memory replay. 
 The buffer regularizer ```beta```  is tuned individually for each method. We provide the best betas 
