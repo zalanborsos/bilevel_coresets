@@ -2,7 +2,7 @@
 
 <img src="thumbnail.png" width="300"/>
 
-This is a reference implementation for "Coresets via Bilevel Optimization for Continual Learning and Streaming" [https://arxiv.org/pdf/2006.03875.pdf](https://arxiv.org/pdf/2006.03875.pdf). 
+This is the reference implementation for "Coresets via Bilevel Optimization for Continual Learning and Streaming" [https://arxiv.org/pdf/2006.03875.pdf](https://arxiv.org/pdf/2006.03875.pdf). 
 
 
 ## Overview
@@ -59,7 +59,14 @@ python runner.py --exp imbalanced_streaming
 ```
 
 The table of result can be displayed by running ```python process_results.py``` 
-with the corresponding ```--exp``` argument.
+with the corresponding ```--exp``` argument. For example, ```python process_results.py --exp imbalanced_streaming``` 
+produces:
+
+| Method \ Dataset  | splitmnistimbalanced   | 
+| :-------------: |:-------------:|
+| reservoir      | 80.60 +- 4.36 | 
+| cbrs      | 89.75 +- 0.97   |  
+| coreset | 92.30 +- 0.23   |  
 
 ## Citation
 
