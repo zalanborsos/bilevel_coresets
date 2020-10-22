@@ -80,7 +80,7 @@ produces:
 | Method \ Dataset  | splitmnistimbalanced   | 
 | :-------------: |:-------------:|
 | reservoir      | 80.60 +- 4.36 | 
-| cbrs      | 89.75 +- 0.97   |  
+| cbrs      | 89.71 +- 1.31   |  
 | coreset | 92.30 +- 0.23   |  
 
 ## Citation
