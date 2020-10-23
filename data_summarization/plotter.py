@@ -64,10 +64,10 @@ def plot_cifar_summary():
     plt.show()
 
 parser = argparse.ArgumentParser(description='Plotter')
-parser.add_argument('--exp', default='mnist', choices=['mnist', 'resnet_cifar'])
+parser.add_argument('--exp', default='cnn_mnist', choices=['cnn_mnist', 'resnet_cifar'])
 args = parser.parse_args()
 exp = args.exp
-if exp == 'mnist':
+if exp == 'cnn_mnist':
     plot_mnist_classification()
 elif exp == 'resnet_cifar':
     plot_cifar_summary()
