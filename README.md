@@ -41,17 +41,25 @@ If you would like to run the experiments, add the project root to your PYTHONPAT
 
 ## Data Summarization
 
-Change dir to ```data_summarizaiton```. For running and plotting the MNIST summarization experiment, adjust the globals
+Change dir to ```data_summarization```. For running and plotting the **MNIST summarization** experiment, adjust the globals
 in ```runner.py``` to your setup and run:
 ```bash
 python runner.py --exp cnn_mnist
 python plotter.py --exp cnn_mnist
 ```
 
-Similarly, for the CIFAR-10 summary for a version of ResNet-18:
+Similarly, for the **CIFAR-10 summary** for a version of **ResNet-18** run:
 ```bash
 python runner.py --exp resnet_cifar
 python plotter.py --exp resnet_cifar
+```
+For running the **Kernel Ridge Regression experiment**, you first need to generate the kernel with ```python generate_cntk.py```.
+Note: this implementation differs in the kernel choice in ```generate_kernel()``` from the paper. For details on the original
+ kernel, please refer to the paper.
+ Once you generated the kernel, generate the results by:
+ ```bash
+python runner.py --exp krr_cifar
+python plotter.py --exp krr_cifar 
 ```
 
 ## Continual Learning and Streaming
@@ -82,6 +90,14 @@ produces:
 | reservoir      | 80.60 +- 4.36 | 
 | cbrs      | 89.71 +- 1.31   |  
 | coreset | 92.30 +- 0.23   |  
+
+The experiments derived from CIFAR-10 can be similarly run by:
+```bash
+python cifar_runner.py --exp cl
+python process_results --exp splitcifar
+python cifar_runner.py --exp imbalanced_streaming
+python process_results --exp imbalanced_streaming_cifar
+```
 
 ## Citation
 
