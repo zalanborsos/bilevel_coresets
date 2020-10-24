@@ -25,9 +25,12 @@ coreset_constructor = bilevel_coreset.BilevelCoreset(outer_loss_fn=loss_utils.cr
                                                     inner_loss_fn=loss_utils.cross_entropy,
                                                     out_dim=y.shape[1])
 coreset_inds, coreset_weights = coreset_constructor.build_with_representer_proxy_batch(x, y, 
-                                                    coreset_size, linear_kernel_fn)
+                                                    coreset_size, linear_kernel_fn, inner_reg=1e-3)
 x_coreset, y_coreset = x[coreset_inds], y[coreset_inds]
 ```
+**Note**: if you are planning to use the library on your problem, the most important hyperparameter to tune
+is ```inner_reg```, the regularizer of the inner objective in the representer proxy - 
+try the grid [10<sup>-2</sup>, 10<sup>-3</sup>, 10<sup>-4</sup>, 10<sup>-5</sup>, 10<sup>-6</sup>].
 
 ## Requirements
 
