@@ -37,6 +37,36 @@ def plot_mnist_classification():
     plt.legend(loc=4)
     plt.show()
 
+
+def plot_krr_cifar():
+    plt.figure(figsize=(5, 3.5))
+    results = {}
+    methods = ['uniform', 'uniform_weights_opt', 'coreset']
+    for method in methods:
+        results_per_method = {'x': [], 'y': []}
+        for seed in range(5):
+            with open('results/krr_cifar10_{}_{}.txt'.format(method, seed), 'r') as f:
+                data = json.load(f)
+            for k in data.keys():
+                results_per_method['x'].append(int(k))
+                results_per_method['y'].append(data[k] * 100)
+        results[method] = results_per_method
+
+    sns.lineplot(results['uniform']['x'], results['uniform']['y'], color='red', label='Uniform')
+    sns.lineplot(results['uniform_weights_opt']['x'], results['uniform_weights_opt']['y'], color='blue',
+                 label='Uniform\n(weights opt)')
+    ax = sns.lineplot(results['coreset']['x'], results['coreset']['y'], color='green', label='Coreset')
+    ax.lines[1].set_linestyle("dotted")
+    ax.lines[2].set_linestyle("dashdot")
+
+    plt.xlim([10, 400])
+    plt.ylim([15, 50.1])
+    plt.xlabel('Subset size', fontsize=16)
+    plt.ylabel('Test Accuracy', fontsize=16)
+    plt.legend(loc=4, fontsize=14)
+    plt.show()
+
+
 def plot_cifar_summary():
     plt.figure(figsize=(5, 3.5))
     results = {}
@@ -63,12 +93,15 @@ def plot_cifar_summary():
     plt.legend(loc=4, fontsize=14)
     plt.show()
 
+
 parser = argparse.ArgumentParser(description='Plotter')
-parser.add_argument('--exp', default='cnn_mnist', choices=['cnn_mnist', 'resnet_cifar'])
+parser.add_argument('--exp', default='cnn_mnist', choices=['cnn_mnist', 'krr_cifar', 'resnet_cifar'])
 args = parser.parse_args()
 exp = args.exp
 if exp == 'cnn_mnist':
     plot_mnist_classification()
+elif exp == 'krr_cifar':
+    plot_krr_cifar()
 elif exp == 'resnet_cifar':
     plot_cifar_summary()
 else:
