@@ -70,7 +70,7 @@ def continual_learning(args):
     bc = bilevel_coreset.BilevelCoreset(outer_loss_fn=loss_utils.cross_entropy,
                                         inner_loss_fn=loss_utils.cross_entropy, out_dim=10, max_outer_it=1,
                                         max_inner_it=200, logging_period=1000)
-
+    rs = np.random.RandomState(args.seed)
     for i in range(generator.max_iter):
         training_op.train(train_loaders[i])
         size_per_task = buffer_size // (i + 1)
@@ -83,7 +83,6 @@ def continual_learning(args):
             chosen_inds, _, = bc.build_with_representer_proxy_batch(X, y, size_per_task, kernel_fn, cache_kernel=True,
                                                                     start_size=1, inner_reg=inner_reg)
         else:
-            rs = np.random.RandomState(0)
             summarizer = summary.Summarizer.factory(method, rs)
             chosen_inds = summarizer.build_summary(X, y, size_per_task, method=method, model=model, device=device)
         X, y = X[chosen_inds], y[chosen_inds]
