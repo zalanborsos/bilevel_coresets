@@ -1,0 +1,41 @@
+{
+    "coreset": {
+        "splitcifar": 100.0
+    },
+    "entropy": {
+        "splitcifar": 1.0
+    },
+    "frcl": {
+        "splitcifar": 1.0
+    },
+    "grad_matching": {
+        "splitcifar": 10.0
+    },
+    "hardest": {
+        "splitcifar": 1.0
+    },
+    "icarl": {
+        "splitcifar": 1.0
+    },
+    "kcenter_embedding": {
+        "splitcifar": 1.0
+    },
+    "kcenter_features": {
+        "splitcifar": 10.0
+    },
+    "kcenter_grads": {
+        "splitcifar": 1.0
+    },
+    "kmeans_embedding": {
+        "splitcifar": 1.0
+    },
+    "kmeans_features": {
+        "splitcifar": 1.0
+    },
+    "kmeans_grads": {
+        "splitcifar": 100.0
+    },
+    "uniform": {
+        "splitcifar": 10.0
+    }
+}

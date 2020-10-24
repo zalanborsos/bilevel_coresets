@@ -1,0 +1,11 @@
+{
+    "cbrs": {
+        "stream_imbalanced_splitcifar": 0.1
+    },
+    "coreset": {
+        "stream_imbalanced_splitcifar": 1.0
+    },
+    "reservoir": {
+        "stream_imbalanced_splitcifar": 0.1
+    }
+}
