@@ -3,6 +3,16 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 
+class LogisticRegression(nn.Module):
+
+    def __init__(self, input_dim, nr_classes):
+        super(LogisticRegression, self).__init__()
+        self.fc = nn.Linear(input_dim, nr_classes)
+
+    def forward(self, x):
+        return self.fc(x)
+
+
 class FNNet(nn.Module):
 
     def __init__(self, input_dim, interm_dim, output_dim):
