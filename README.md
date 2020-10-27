@@ -4,6 +4,10 @@
 
 This is the reference implementation for "Coresets via Bilevel Optimization for Continual Learning and Streaming" [https://arxiv.org/pdf/2006.03875.pdf](https://arxiv.org/pdf/2006.03875.pdf). 
 
+This repository also contains the implementation of the selection via Nyström proxy used for selecting
+batches in "Semi-supervised Batch Active Learning via Bilevel Optimization" [https://arxiv.org/pdf/2010.09654](https://arxiv.org/pdf/2010.09654).
+Selection via the Nyström proxy supports data augmentation, it is faster for larger coresets and hence supersedes the
+representer proxy in data summarization scenarios.
 
 ## Overview
 To get started with the library, check out [`demo.ipynb`](https://github.com/zalanborsos/bilevel_coresets/blob/main/demo.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/zalanborsos/bilevel_coresets/blob/main/demo.ipynb)
@@ -101,6 +105,10 @@ python process_results --exp splitcifar
 python cifar_runner.py --exp imbalanced_streaming
 python process_results --exp imbalanced_streaming_cifar
 ```
+
+## Selection via the Nyström proxy
+The Nyström proxy was proposed to support data augmentations. It is also faster for larger coresets than the representer
+proxy. An example of running the selection on CIFAR-10 can be found in ```batch_active_learning/nystrom_example.py```.  
 
 ## Citation
 
