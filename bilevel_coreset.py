@@ -247,7 +247,7 @@ class BilevelCoreset:
         # create Nystrom feature mapper
         self.select_nystrom_batch(dataset_wo_augm, kernel_fn_np, loader_creator_fn, nystrom_features_dim)
 
-        # generate the features for the upper lever objective
+        # generate the features for the upper level objective
         n = len(dataset_wo_augm.targets)
         available_inds = np.setdiff1d(np.arange(n), base_inds)
         val_inds = np.random.choice(available_inds, val_size, replace=False)
@@ -332,8 +332,8 @@ class BilevelCoreset:
             sorted_inds = np.argsort(weight_grad.numpy())
 
             for s in sorted_inds:
-                if s not in inds:
-                    selected_ind = val_inds[s]
+                selected_ind = val_inds[s]
+                if selected_ind not in inds:
                     inds = np.append(inds, selected_ind)
                     break
             x, y = presample_transforms(selected_ind)
